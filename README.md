@@ -136,7 +136,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -173,4 +173,4 @@ Project Link: [https://github.com/PyroCalzone/BrailleVideo](https://github.com/P
 [issues-shield]: https://img.shields.io/github/issues/PyroCalzone/BrailleVideo.svg?style=for-the-badge
 [issues-url]: https://github.com/PyroCalzone/BrailleVideo/issues
 [license-shield]: https://img.shields.io/github/license/PyroCalzone/BrailleVideo.svg?style=for-the-badge
-[license-url]: https://github.com/PyroCalzone/BrailleVideo/blob/master/LICENSE.txt
+[license-url]: https://github.com/PyroCalzone/BrailleVideo/blob/master/LICENSE.md
