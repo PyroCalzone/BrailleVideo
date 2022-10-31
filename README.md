@@ -22,7 +22,7 @@
 <br />
 <div align="center">
 <a href="https://github.com/PyroCalzone/BrailleVideo">
-    <img src="images/BrailleLogo.png" alt="Logo" width="80" height="80">
+    <img src="assets/BrailleLogo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">BrailleVideo</h3>
