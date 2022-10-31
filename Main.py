@@ -114,5 +114,5 @@ def playVideoTerminal(fps, frames):
 if __name__ == '__main__':
     videoFile = 'Example/BadApple88.mp4'
     audioFile =  'Example/BadApple.mp3'
-    fps, frames = convertVideo(videoFile, compression=2)
+    fps, frames = convertVideo(videoFile, compression=1)
     playVideo(fps, frames, audioFile=audioFile)
