@@ -88,11 +88,11 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use convertVideo(file) to convert your mp4 file into a series of frames with braille characters instead of pixels, this outputs a tuple of fps and frames. </br>
-Then use playVideo(fps, frames) or playVideoTerminal(fps, frames).</br>
-You can also use resizeVideo(file, scale) to make your video smaller. I used 88px^2 in the example files.</br>
-audioFromVideo(file) will convert your video file into an mp3 file so you can use it with playVideo(fps, frames, audioFile=file) to get your audio while you watch.</br>
-convertToBraille(code) returns the braille character corresponding to the braille code inputted. 1234 -> ⠏, 125 -> ⠓. Code goes as follows, Left column top to bottom: 1, 2, 3, 7. Right column top to bottom: 4, 5, 6, 8
+* `convertVideo(file)` converts mp4 file to braille frames. Compression skips frames E.G. `fps, frames = convertVideo(videoFile, compression=2)`
+* `playVideo(fps, frames)` plays braille video using pygame, more accurate than terminal. E.G. `playVideo(fps, frames, audioFile=audioFile)`
+* `playVideoTerminal(fps, frames)` plays braille video using terminal. E.G. `playVideoTerminal(fps, frames)`
+* `audioFromVideo(file)` converts video file into mp3 for use with `playVideo(audioFile=)`. E.G. `audioFile = audioFromFile('BadApple.mp4')`
+* `convertToBraille(code)` converts braille code into braille characters. Left column top to bottom: 1, 2, 3, 7. Right column top to bottom: 4, 5, 6, 8. so code `123568` is `⢷`
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
