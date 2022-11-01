@@ -87,11 +87,12 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* `convertVideo(file)` converts mp4 file to braille frames. Compression skips frames E.G. `fps, frames = convertVideo(videoFile, compression=2)`
-* `playVideo(fps, frames)` plays braille video using pygame, more accurate than terminal. E.G. `playVideo(fps, frames, audioFile=audioFile)`
+* `convertVideo(file, compression=1)` converts mp4 file to braille frames. Compression skips frames, save  E.G. `fps, frames = convertVideo(videoFile, compression=2)`
+* `playVideo(fps, frames, audioFile = None, save=False)` plays braille video using pygame, more accurate than terminal. Save will save each frame to a folder called frames, this if for use with `makeMP4()` E.G. `playVideo(fps, frames, audioFile=audioFile)`
 * `playVideoTerminal(fps, frames)` plays braille video using terminal. E.G. `playVideoTerminal(fps, frames)`
 * `audioFromVideo(file)` converts video file into mp3 for use with `playVideo(audioFile=)`. E.G. `audioFile = audioFromFile('BadApple.mp4')`
 * `convertToBraille(code)` converts braille code into braille characters. Left column top to bottom: 1, 2, 3, 7. Right column top to bottom: 4, 5, 6, 8. so code `123568` is `⢷`
+* `makeMP4(audioFile = None)` takes saved frames from `playVideo(fps, frames, save=True)` and converts it to a mp4 video file called output.mp4.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -106,6 +107,7 @@ To get a local copy up and running follow these simple steps.
 - [x] Terminal video player
 - [x] Non-Terminal video player
 - [x] Audio with video player
+- [X] Output video converter!
 
 
 See the [open issues](https://github.com/PyroCalzone/BrailleVideo/issues) for a full list of proposed features (and known issues).
