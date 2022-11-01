@@ -69,7 +69,12 @@ def convertVideo(file, compression=1):
         frames.append(brailleFrame)
     return (fps//compression, frames)
 
-def playVideo(fps, frames, audioFile = None):
+def playVideo(fps, frames, audioFile = None, save = False):
+    if save:
+        #Create frames folder
+        if not os.path.exists('frames'):
+            os.makedirs('frames')
+        count = 0
     height = len(frames[0])
     width = len(frames[0][0])
     import pygame
@@ -82,7 +87,7 @@ def playVideo(fps, frames, audioFile = None):
     font = pygame.font.Font('Fonts/DejaVuSans.ttf', 20)
     if audioFile != None:
         pygame.mixer.music.load(audioFile)
-        pygame.mixer.music.set_volume(0.25)
+        pygame.mixer.music.set_volume(0.10)
         pygame.mixer.music.play()
     for frame in frames:
         for event in pygame.event.get():
@@ -95,6 +100,10 @@ def playVideo(fps, frames, audioFile = None):
                 text = font.render(item, True, (255,255,255))
                 screen.blit(text, (colIndex*15, rowIndex*25))
         pygame.display.flip()
+        if save: #Warning, saving frames is very slow. You can end up with the audio being something like 10 or 20 seconds off depending on length of video
+            #Only turn on saving if you plan to mix with makeMP4()
+            count += 1
+            pygame.image.save(screen, f'frames/{"%08d.png"%count}')
         clock.tick(fps)
     if audioFile != None:
         pygame.mixer.music.stop()
@@ -110,9 +119,20 @@ def playVideoTerminal(fps, frames):
         sleep(1/fps)
         input()
 
+def makeMP4(audioFile=None):
+    if audioFile != None:
+        os.system(f"ffmpeg -r 30 -i frames\\%08d.png -i {audioFile} -vcodec mpeg4 -q:v 0 -y output.mp4")
+    else:
+        os.system("ffmpeg -r 30 -i frames\\%08d.png -vcodec mpeg4 -q:v 0 -y output.mp4")
+
 
 if __name__ == '__main__':
+    #This example usage will convert the video to braille, play it in a pygame window
+    #and then save the frames to a folder called frames. Then uses makeMP4() to
+    #combine the frames and audio into a video file called output.mp4
+
     videoFile = 'Example/BadApple88.mp4'
     audioFile =  'Example/BadApple.mp3'
     fps, frames = convertVideo(videoFile, compression=1)
-    playVideo(fps, frames, audioFile=audioFile)
+    playVideo(fps, frames, audioFile=audioFile, save=True) #save=True is very slow, but it's the only way to get a mp4 video output. If you don't want to save, set save=False
+    makeMP4(audioFile=audioFile)
