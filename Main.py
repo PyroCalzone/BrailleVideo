@@ -1,4 +1,3 @@
-from cv2 import resize
 from braildict import brailleDictionary
 import os
 import skvideo.io
