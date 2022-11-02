@@ -1,3 +1,4 @@
+from cv2 import resize
 from braildict import brailleDictionary
 import os
 import skvideo.io
@@ -26,7 +27,7 @@ def convertVideo(file, compression=1):
     width = int(videometadata['video']['@width'])
     height = int(videometadata['video']['@height'])
     fps = int(videometadata['video']['@avg_frame_rate'].split('/')[0])//1
-    compressed = viddat[1::compression]
+    compressed = viddat[0::compression]
     frames = []
     if compression != 1:
         print(f"Compressed video to {fps//compression} FPS")
@@ -36,7 +37,7 @@ def convertVideo(file, compression=1):
     if width % 2 != 0:
         raise Exception("Video Width is not divisible by 2")
 
-    for frame in compressed[3:]:
+    for frame in compressed:
         blackAndWhite = []
 
         for currentRow in frame:
@@ -119,11 +120,11 @@ def playVideoTerminal(fps, frames):
         sleep(1/fps)
         input()
 
-def makeMP4(audioFile=None):
+def makeMP4(audioFile=None, fps=30):
     if audioFile != None:
-        os.system(f"ffmpeg -r 30 -i frames\\%08d.png -i {audioFile} -vcodec mpeg4 -q:v 0 -y output.mp4")
+        os.system(f"ffmpeg -r {fps} -i frames\\%08d.png -i {audioFile} -vcodec mpeg4 -q:v 0 -y output.mp4")
     else:
-        os.system("ffmpeg -r 30 -i frames\\%08d.png -vcodec mpeg4 -q:v 0 -y output.mp4")
+        os.system(f"ffmpeg -r {fps} -i frames\\%08d.png -vcodec mpeg4 -q:v 0 -y output.mp4")
 
 
 if __name__ == '__main__':
@@ -134,5 +135,5 @@ if __name__ == '__main__':
     videoFile = 'Example/BadApple88.mp4'
     audioFile =  'Example/BadApple.mp3'
     fps, frames = convertVideo(videoFile, compression=1)
-    playVideo(fps, frames, audioFile=audioFile, save=True) #save=True is very slow, but it's the only way to get a mp4 video output. If you don't want to save, set save=False
-    makeMP4(audioFile=audioFile)
+    playVideo(fps, frames, audioFile=None, save=True) #save=True is very slow, but it's the only way to get a mp4 video output. If you don't want to save, set save=False
+    makeMP4(audioFile=None, fps=fps)
